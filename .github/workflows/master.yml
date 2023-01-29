@@ -18,8 +18,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          envs: ENV_FQDN
           script: |
-            echo $ENV_FQDN
             cd PairDrop
             git pull
             cd docker
