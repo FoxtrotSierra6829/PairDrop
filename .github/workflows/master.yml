@@ -23,7 +23,7 @@ jobs:
             git pull
             cd docker
             cat <<EOF > .env
-            FQDN=$ENV_FQDN
+            FQDN="$ENV_FQDN"
             EOF
             cd ..
             sudo docker compose up -d
