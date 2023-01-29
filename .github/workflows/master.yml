@@ -9,16 +9,10 @@ jobs:
     if: github.repository_owner == 'FoxtrotSierra6829'
     runs-on: ubuntu-18.04
     steps:
-      - name: populate .env file
-        env:
-          ENV_FQDN: ${{ secrets.ENV_FQDN }}
-        run: |
-          cd docker
-          cat <<EOF > .env
-          FQDN=$ENV_FQDN
-          EOF
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.6
+        env:
+          ENV_FQDN: ${{ secrets.ENV_FQDN }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -27,4 +21,9 @@ jobs:
           script: |
             cd PairDrop
             git pull
+            cd docker
+            cat <<EOF > .env
+            FQDN=$ENV_FQDN
+            EOF
+            cd ..
             sudo docker compose up -d
