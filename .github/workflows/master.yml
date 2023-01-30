@@ -22,6 +22,8 @@ jobs:
           script: |
             cd PairDrop
             git pull
+            mv docker-compose.yml docker-compose.yml.development
+            mv docker-compose.yml.production docker-compose.yml
             cd docker
             cat <<EOF > .env
             FQDN=$ENV_FQDN
